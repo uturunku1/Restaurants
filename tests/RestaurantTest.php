@@ -13,11 +13,11 @@
 
     class RestaurantTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Cuisine::deleteAll();
-        //     // Restaurant::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Cuisine::deleteAll();
+            Restaurant::deleteAll();
+        }
 
         function test_getId()
         {
@@ -55,5 +55,66 @@
             $this->assertEquals($name, $result);
 
         }
+
+        function test_getCuisineId()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=1;
+            $name="Yama";
+            $cuisine_id= $cuisine->getId();
+            $restaurant = new Restaurant($id,$name,$cuisine_id);
+            $restaurant->save();
+
+            $result= $restaurant->getCuisineId();
+
+            $this->assertEquals($cuisine_id, $result);
+        }
+
+        function test_save()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=1;
+            $name="Yama";
+            $cuisine_id= $cuisine->getId();
+            $restaurant = new Restaurant($id,$name,$cuisine_id);
+
+            $restaurant->save();
+
+            $result = Restaurant::getAll();
+            $this->assertEquals($restaurant, $result[0]);
+
+        }
+        function test_getAll()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=1;
+            $name="Yama";
+            $cuisine_id=$cuisine->getId();
+            $restaurant= new Restaurant($id, $name, $cuisine_id);
+            $restaurant->save();
+            $id2=2;
+            $name2="Yuki";
+            $cuisine_id=$cuisine->getId();
+            $restaurant2= new Restaurant($id2, $name2, $cuisine_id);
+            $restaurant2->save();
+
+            $result= Restaurant::getAll();
+
+            $this->assertEquals([$restaurant, $restaurant2], $result);
+
+        }
+        
     }
  ?>

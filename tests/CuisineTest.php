@@ -15,7 +15,7 @@
         protected function tearDown()
         {
             Cuisine::deleteAll();
-            // Restaurant::deleteAll();
+            Restaurant::deleteAll();
         }
         function test_getType()
         {
@@ -101,6 +101,30 @@
 
             $this->assertEquals([], $result);
         }
+        function test_getRestaurants()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=1;
+            $name="Yama";
+            $cuisine_id=$cuisine->getId();
+            $restaurant= new Restaurant($id, $name, $cuisine_id);
+            $restaurant->save();
+            $id2=2;
+            $name2="Yuki";
+            $cuisine_id=$cuisine->getId();
+            $restaurant2= new Restaurant($id2, $name2, $cuisine_id);
+            $restaurant2->save();
+
+
+            $result= $cuisine->getRestaurants();
+
+            $this->assertEquals([$restaurant, $restaurant2], $result);
+        }
+
 
     }
 
