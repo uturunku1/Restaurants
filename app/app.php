@@ -13,6 +13,7 @@
     $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
+    $app['debug']= true;
 
     $app->register(
        new Silex\Provider\TwigServiceProvider(),
@@ -24,17 +25,17 @@
     });
 
     $app->post('/post/cuisines', function() use($app) {
-        $cuisine = new Cuisine ($_POST['type']);
+        $cuisine = new Cuisine($id=null, $_POST['type']);
         $cuisine->save();
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
-    $app->get('/cuisines/{id}', function($id) use($app)){
+    $app->get('/cuisines/{id}', function($id) use($app){
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
     });
 
-    $app->post("/restaurants", function() use($app)){
+    $app->post("/restaurants", function() use($app){
         $name = $_POST['name'];
         $cuisine_id = $_POST['cuisine_id'];
         $restaurant = new Restaurant($id= null, $name, $cuisine_id);
@@ -44,6 +45,5 @@
     });
 
     return $app;
-    
-    }
+
  ?>

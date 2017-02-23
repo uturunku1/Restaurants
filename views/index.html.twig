@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurants</title>
+    </head>
+    <body>
+        <h2>Sort Restaurants into Categories</h2>
+
+        <p>Add a new cuisine:</p>
+
+        <form action="/post/cuisines" method="post">
+            <label for="type">Cuisine type:</label>
+            <input type="text" name="type">
+
+            <button type="submit">Submit</button>
+        </form>
+        {%if cuisines is not empty%}
+        <h4>Cuisine Types:</h4>
+        <ul>
+            {%for cuisine in cuisines%}
+                <li><a href="/get/cuisines/{{cuisine.getId}}">{{cuisine.getType}}</a></li>
+            {%endfor%}
+        </ul>
+        {%endif%}
+    </body>
+</html>
