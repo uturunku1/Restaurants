@@ -7,10 +7,8 @@
     <body>
         <h2>Sort Restaurants into Categories</h2>
 
-        <p>Add a new cuisine:</p>
-
         <form action="/cuisines" method="post">
-            <label for="type">Cuisine type:</label>
+            <label for="type">Add a New Cuisine Type:</label>
             <input type="text" name="type">
 
             <button type="submit">Submit</button>
@@ -23,6 +21,6 @@
             {%endfor%}
         </ul>
         {%endif%}
-        
+
     </body>
 </html>

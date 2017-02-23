@@ -14,10 +14,13 @@
     </form>
 
     {% if restaurants is not empty %}
-      {% for restaurant in restaurants %}
-        <li>{{ restaurant.getName }}<li>
-      {% endfor %}
-    {% endif %}
+        <ul>
+          {% for restaurant in restaurants %}
+            <li>{{ restaurant.getName }}</li>
+          {% endfor %}
+        </ul>
+    {% endif %}</br>
+
     <a href="/">Back</a><br>
     <a href="/cuisines/{{cuisine.getId}}/edit">Edit the name of the cuisine type.</a>
   </body>

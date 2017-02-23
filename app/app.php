@@ -45,6 +45,12 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
     });
 
+    $app->delete('/cuisines/{id}', function($id) use($app) {
+        $cuisine = Cuisine::find($id);
+        $cuisine->deleteCuisine();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
     $app->post("/restaurants", function() use($app){
         $name = $_POST['name'];
         $cuisine_id = $_POST['cuisine_id'];

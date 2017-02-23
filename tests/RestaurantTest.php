@@ -115,6 +115,30 @@
             $this->assertEquals([$restaurant, $restaurant2], $result);
 
         }
-        
+        function test_deleteOne()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=null;
+            $name="Yama";
+            $cuisine_id= $cuisine->getId();
+            $restaurant = new Restaurant($id,$name,$cuisine_id);
+            $restaurant->save();
+            $id=null;
+            $name2= "Yuki";
+            $cuisine_id= $cuisine->getId();
+            $restaurant2 = new Restaurant($id,$name2,$cuisine_id);
+            $restaurant2->save();
+
+            $restaurant2->deleteOne();
+            $result = Restaurant::getAll();
+
+            $this->assertEquals([$restaurant], $result);
+        }
+
+
     }
  ?>
