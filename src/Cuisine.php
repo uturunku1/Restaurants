@@ -45,6 +45,12 @@
         return $cuisines;
     }
 
+    function editCuisine($new_type)
+    {
+      $GLOBALS['DB']->exec("UPDATE cuisines SET type = '{$new_type}' WHERE id = {$this->getId()};");
+      $this->setType($new_type);
+    }
+
     static function find($search_id)
     {
         $found_cuisine = null;

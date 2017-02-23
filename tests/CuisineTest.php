@@ -125,6 +125,21 @@
             $this->assertEquals([$restaurant, $restaurant2], $result);
         }
 
+        function test_editCuisine()
+        {
+          $id=null;
+          $type="Japanese";
+          $cuisine= new Cuisine($id, $type);
+          $cuisine->save();
+
+          $new_type="Sushi";
+
+          $cuisine->editCuisine($new_type);
+          $result = $cuisine->getType();
+
+          $this->assertEquals($new_type, $result);
+        }
+
 
     }
 
