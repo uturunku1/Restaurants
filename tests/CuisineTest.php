@@ -140,6 +140,44 @@
           $this->assertEquals($new_type, $result);
         }
 
+        function test_deleteCuisine()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=null;
+            $type2="Italian";
+            $cuisine2= new Cuisine($id, $type2);
+            $cuisine2->save();
+
+            $cuisine2->deleteCuisine();
+            $result= Cuisine::getAll();
+
+            $this->assertEquals([$cuisine], $result);
+        }
+        function test_deleteCuisineRest()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=null;
+            $name="Yama";
+            $cuisine_id= $cuisine->getId();
+            $new_restaurant=new Restaurant($id, $name, $cuisine_id);
+            $new_restaurant->save();
+
+            $cuisine->deleteCuisine();
+
+            $cuisine->deleteCuisine();
+            $result= Cuisine::getAll();
+
+            $this->assertEquals([], $result);
+        }
+
 
     }
 
