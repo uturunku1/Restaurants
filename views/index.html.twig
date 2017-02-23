@@ -9,7 +9,7 @@
 
         <p>Add a new cuisine:</p>
 
-        <form action="/post/cuisines" method="post">
+        <form action="/cuisines" method="post">
             <label for="type">Cuisine type:</label>
             <input type="text" name="type">
 
@@ -19,7 +19,7 @@
         <h4>Cuisine Types:</h4>
         <ul>
             {%for cuisine in cuisines%}
-                <li><a href="/get/cuisines/{{cuisine.getId}}">{{cuisine.getType}}</a></li>
+                <li><a href="/cuisines/{{cuisine.getId}}">{{cuisine.getType}}</a></li>
             {%endfor%}
         </ul>
         {%endif%}
