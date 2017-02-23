@@ -1,0 +1,7 @@
+<h1>Edit the cuisine {{cuisine.getType}} type:</h1>
+<form action="/cuisines/{{cuisine.getId}}" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="type">Edit Cuisine type:</label>
+    <input type="text" name="type">
+    <button type="submit">Submit</button>
+</form>

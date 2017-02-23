@@ -34,6 +34,16 @@
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
     });
+    $app->get('/cuisines/{id}/edit', function($id) use($app) {
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine_edit.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
+    });
+    $app->patch('/cuisines/{id}', function($id) use($app) {
+        $new_type = $_POST['type'];
+        $cuisine= Cuisine::find($id);
+        $cuisine->editCuisine($new_type);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
+    });
 
     $app->post("/restaurants", function() use($app){
         $name = $_POST['name'];
