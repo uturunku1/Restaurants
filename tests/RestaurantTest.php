@@ -139,6 +139,29 @@
             $this->assertEquals([$restaurant], $result);
         }
 
+        function test_findOne()
+        {
+            $id=null;
+            $type="Japanese";
+            $cuisine= new Cuisine($id, $type);
+            $cuisine->save();
+
+            $id=null;
+            $name="Yama";
+            $cuisine_id= $cuisine->getId();
+            $restaurant = new Restaurant($id,$name,$cuisine_id);
+            $restaurant->save();
+            $id=null;
+            $name2= "Yuki";
+            $cuisine_id= $cuisine->getId();
+            $restaurant2 = new Restaurant($id,$name2,$cuisine_id);
+            $restaurant2->save();
+
+            $result = Restaurant::findOne($restaurant->getId());
+
+            $this->assertEquals($restaurant, $result);
+        }
+
 
     }
  ?>

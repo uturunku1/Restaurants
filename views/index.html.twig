@@ -3,13 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title>Restaurants</title>
+        <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+
     </head>
     <body>
         <h2>Sort Restaurants into Categories</h2>
 
         <form action="/cuisines" method="post">
             <label for="type">Add a New Cuisine Type:</label>
-            <input type="text" name="type">
+            <input type="text" name="type" required>
 
             <button type="submit">Submit</button>
         </form>

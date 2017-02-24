@@ -25,7 +25,7 @@
     });
 
     $app->post('/cuisines', function() use($app) {
-        $cuisine = new Cuisine($id=null, $_POST['type']);
+        $cuisine = new Cuisine(filter_var($id=null,FILTER_SANITIZE_MAGIC_QUOTES),filter_var($_POST['type'], FILTER_SANITIZE_MAGIC_QUOTES));
         $cuisine->save();
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
@@ -33,6 +33,13 @@
     $app->get('/cuisines/{id}', function($id) use($app){
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
+    });
+    $app->delete('/restaurants/{id}', function($id) use($app) {
+        $rest = Restaurant::findOne($id);
+        $cuisine = Cuisine::find($rest->getCuisineId());
+        $rest->deleteOne();
+        // return $app['twig']->render('cuisine.html.twig', array('cuisine'=>$cuisine, 'restaurants'=>$cuisine->getRestaurants()));
+        return $app->redirect("/cuisines/{$cuisine->getId()}");
     });
     $app->get('/cuisines/{id}/edit', function($id) use($app) {
         $cuisine = Cuisine::find($id);

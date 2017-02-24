@@ -49,11 +49,27 @@
             }
             return $restaurants;
         }
+        static function findOne($search_id)
+        {
+            $found_restaurant = null;
+            $restaurants = Restaurant::getAll();
+            foreach($restaurants as $restaurant){
+                $id= $restaurant->getId();
+                $name= $restaurant->getName();
+                $cuisine_id = $restaurant->getCuisineId();
+
+                if($id == $search_id){
+                    $found_restaurant = $restaurant;
+                }
+            }
+            return $found_restaurant;
+
+        }
 
         function deleteOne()
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id={$this->getId()};");
-            //
+
             // $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id={$this->getid()};");
         }
 

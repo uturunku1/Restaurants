@@ -3,20 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Restaurants</title>
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="/styles.css" media="screen" title="no title" charset="utf-8">
+
   </head>
   <body>
     <h1>{{cuisine.getType}}</h1>
     <form action="/restaurants" method="post">
-      <input type="hidden" name="cuisine_id" value="{{cuisine.getId()}}">
+      <input type="hidden" name="cuisine_id" value="{{cuisine.getId()}}" required>
       <label for="name">Enter a Restaurant</label>
-      <input type="text" name="name">
+      <input type="text" name="name" required>
       <button type="submit">Add</button>
     </form>
 
     {% if restaurants is not empty %}
         <ul>
           {% for restaurant in restaurants %}
-            <li>{{ restaurant.getName }}</li>
+          <li>{{ restaurant.getName }}
+            <form class="solo-btn" action="/restaurants/{{ restaurant.getId }}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button class="btn" type="submit">Delete</button>
+            </form>
+          </li>
           {% endfor %}
         </ul>
     {% endif %}</br>
